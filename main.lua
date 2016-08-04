@@ -147,22 +147,30 @@ function love.update(dt)
     end
        
      if love.keyboard.isDown('a') then
+            if tankX > 43 then
             tankX = tankX - incrementoTank
             rotacaoTank = 0
+            end    
     end
         
     if love.keyboard.isDown('d') then
+            if tankX < 1350 then
             tankX = tankX + incrementoTank
             rotacaoTank = 0
+            end    
     end    
     
     if love.keyboard.isDown('w') then
+            if tankY > 43 then
             tankY = tankY - incrementoTank
             rotacaoTank = -1.56
+            end    
     end      
     if love.keyboard.isDown('s') then
+            if tankY < 680 then
             tankY = tankY + incrementoTank
             rotacaoTank = 1.56
+            end    
     end 
     if  love.keyboard.isDown('a') and  love.keyboard.isDown('w') == true then
             rotacaoTank = 0.6
@@ -315,7 +323,7 @@ function love.draw()
         
         --desenha vidas do tank
         for auxilar=1, hpTank do
-            love.graphics.draw(coracao,930+auxilar*25 ,90, 0, 1, 1, coracao:getWidth(), coracao:getHeight())
+            love.graphics.draw(coracao,560+auxilar*60 ,90, 0, 1, 1, coracao:getWidth(), coracao:getHeight())
         end
         
         --verifica vida do tank
