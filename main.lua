@@ -32,19 +32,27 @@ function love.load()
     hp = love.graphics.newImage("Imagens/hp.png")
     play = love.graphics.newImage("Imagens/play.png")
     fundoMenu = love.graphics.newImage("Imagens/fundo_Menu2.png")
+    bolaEspecial=love.graphics.newImage("Imagens/bolaEspecial.png")
     t = love.graphics.newImage("Imagens/titulo1.png")
     coracao = love.graphics.newImage("Imagens/coracao.png")
     imgDasBalas[0]=love.graphics.newImage("Imagens/bala.png")
     voltar = love.graphics.newImage("Imagens/voltar.png")
     inicio = love.graphics.newImage("Imagens/inicio.png")
-    bolaEspecial = love.graphics.newImage("Imagens/bolaEspecial.png")
-    
     somMenu = love.audio.newSource("Sons/bass_menu.mp3")
     somTiro = love.audio.newSource("Sons/bass_tiro.mp3")
     hit = love.audio.newSource("Sons/hit.mp3")
     somPlay = love.audio.newSource("Sons/bass_play.mp3")
     Drive = love.audio.newSource("Sons/drive.wav")
+
     
+    imgEspeciais[1] = love.graphics.newImage("Imagens/bolaEspecial.png")
+    table.insert(imgEspeciais,love.graphics.newImage("Imagens/Especial.png"))
+
+    table.insert(listaImgDasBalasEspeciais,love.graphics.newImage("Imagens/balaEspecial1.png"))
+    table.insert(listaImgDasBalasEspeciais,love.graphics.newImage("Imagens/balaEspecial2.png"))
+    table.insert(listaImgDasBalasEspeciais,love.graphics.newImage("Imagens/balaEspecial3.png"))
+    table.insert(listaImgDasBalasEspeciais,love.graphics.newImage("Imagens/balaEspecial4.png"))
+
     table.insert(imgDasBalas,love.graphics.newImage("Imagens/bala1.png"))
     table.insert(imgDasBalas,love.graphics.newImage("Imagens/bala2.png"))
      
@@ -128,13 +136,18 @@ function love.update(dt)
 ----------------------------------------------------------------------------
 --Comando de teclado--    
     if love.keyboard.isDown('space') then
-        qualQuadrante()    
-        if(delay<=0) then
-            if(somGeral) then
-                love.audio.play(somTiro)     
-            end   
-            atirarBalas()    
-            delay=velocidadeTiro
+        qualQuadrante()
+        if(especialAtivado == true) then
+            atirarBalasEspecial1()
+
+         else   
+             if(delay<=0) then
+                if(somGeral) then
+                    love.audio.play(somTiro)     
+                end   
+                    atirarBalas()    
+                delay=velocidadeTiro
+            end
         end
     end
 
@@ -212,6 +225,10 @@ function love.update(dt)
     for j, bolas in ipairs(listaBolaspika) do
         for i, balas in ipairs(listaDeBalas) do
             if ColisaoBalas(bolas.x, bolas.y, balas.x, balas.y, bolas.raio, balas.raio) == true then
+                if(bolas.especial)then
+                especialAtivado = true
+                especialFim= os.clock("%s")+5
+                end
                 verificaHp(bolas,balas)
                 verificaMorteBola(bolas,balas,listaBolaspika,j)
                 table.remove(listaDeBalas, i)     
@@ -229,6 +246,11 @@ function love.update(dt)
             table.remove(listaDeBalas,i)
         end
     end
+    -----------Verifica o tempo do especial--------------------
+    if(os.clock("%s")>especialFim) then
+       especialAtivado=false
+    end
+    ------------------------------------------------------
 ------------------------------------------------------------------------------
 -- Verificar se a bola saiu da dela --
     for j, bolas in ipairs(listaBolaspika) do
@@ -278,7 +300,6 @@ function love.update(dt)
 end
 ------------------------------------------------------------------------------
 
-round(os.clock("%s") - tempoDepartida,0)
 
 
 -----------Desenhar na tela--------------------------------------------------
@@ -301,6 +322,7 @@ function love.draw()
         pontosCor = {{0,0,0}, pontos ,} 
                 
         love.graphics.print(pontoslbl,love.graphics.getWidth() - (love.graphics.getWidth()*0.32),25)
+         love.graphics.print(geradorEspecial,100,100)
         love.graphics.print(pontosCor,love.graphics.getWidth() - (love.graphics.getWidth()*0.10),25)
         
         --balas--

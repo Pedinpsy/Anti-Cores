@@ -13,6 +13,8 @@ listaImgBolasPequenas = {}
 listaDeBalas = {}
 listaDebolas = {}
 imgDasBalas = {}
+imgEspeciais = {}
+listaImgDasBalasEspeciais = {}
 
 velocidadeTiro = 10 --delay de tiro
 angulo = 0
@@ -22,6 +24,7 @@ delay = 0
 largura = 1500
 altura = 700
 tiposDeBolas={"grande","pequena","media"}
+tiposDeBolasEspeciais={"velocidade","variosTiros"}
 jogo = 2
 hpTank = 3
 somGeral = true
@@ -29,7 +32,8 @@ auxJogo3=0
 ---test---
 balasNaLista=0
 tempoGerar = 0
-
+especialAtivado = false
+especialFim=0
 -- velocidade de movimento minimo e maximo da bola
 incrementoMinimo = 1
 incrementoMaximo = 4
@@ -53,4 +57,6 @@ tankX = 700
 tankY = 350
 incrementoTank = 2
 rotacaoTank = 0
+
+geradorEspecial=999
 ----------------------------------------------------------------------

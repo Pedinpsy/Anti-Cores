@@ -27,3 +27,38 @@ function atirarBalas()
 
 end
 ---------------------------------------------------------------------
+function atirarBalasEspecial1()
+    balas = {}  --Tabela de Atributos
+    balas.img = listaImgDasBalasEspeciais[math.random(1 ,#listaImgDasBalasEspeciais)]  --Imagem
+    balas.angulo = angulo  --Angulo de spawn  --Angulo da arma
+    balas.width = balas.img:getWidth()   --Define Largura
+    balas.heigth = balas.img:getHeight()   --Define Altura
+    balas.x = tankX + math.cos(math.rad(angulo)) * -30  --Gerado em uma circunferecia do centro
+    balas.y = tankY + math.sin(math.rad(angulo)) * -36  --Gerado em uma circunferecia do centro
+    balas.incrementoX = math.cos(math.rad(angulo)) * -10  --Velocidade em X
+    balas.incrementoY = math.sin(math.rad(angulo)) * -10  --Velocidade em Y
+    balas.raio = 9 --Raio de colisão da bala
+    balas.dano = 1 --Dano casuado
+    table.insert(listaDeBalas, balas)
+
+end
+function atirarBalasEspecial2()
+    balas = {}  --Tabela de Atributos
+    balas.img = listaImgDasBalasEspeciais[math.random(1 ,#listaImgDasBalasEspeciais)]  --Imagem
+    
+    balas.width = balas.img:getWidth()   --Define Largura
+    balas.heigth = balas.img:getHeight()   --Define Altura
+   
+    balas.raio = 9 --Raio de colisão da bala
+    balas.dano = 1 --Dano casuado
+    
+    balas.angulo = 180  --Angulo de spawn  --Angulo da arma
+    balas.x = tankX   --Gerado em uma circunferecia do centro
+    balas.y = tankY --Gerado em uma circunferecia do centro
+    balas.incrementoX = math.cos(math.rad(50)) * -10  --Velocidade em X
+    balas.incrementoY = math.sin(math.rad(50)) * -10  --Velocidade em Y
+    table.insert(listaDeBalas, balas)
+    
+    
+
+end

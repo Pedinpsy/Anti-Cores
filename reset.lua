@@ -28,7 +28,7 @@ function reset()
     -- tempo minimo e tempo maximo que pode ser gerado uma nova bola
     tempoGerarBolasMinimo = 1
     tempoGerarBolasMaximo = 3
-    tempoDepartida = 0
+    tempoDepartida = os.clock("%s")
     -------
 tankX = 700
 tankY = 350

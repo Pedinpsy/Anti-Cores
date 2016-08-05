@@ -6,6 +6,7 @@ function verificaMorteBola(bola,bala,listaBolaspika,j) --Verifica morte da bola 
 	if bola.hp <=0 then
 		      table.remove(listaBolaspika, j)
 		      pontos = pontos+bola.valor
+		      geradorEspecial=geradorEspecial+bola.valor
         if somGeral then
               love.audio.play(hit)
 		end

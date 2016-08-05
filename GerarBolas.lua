@@ -1,8 +1,14 @@
 ------Define listas de atributos para as bolas sendo que a principal eh uma matriz tetradimensional para selecao aleatoria diferentes classes  
 function gerarBolas()
     local bolas = {}
+    bolas.especial=false
+    if(geradorEspecial>=1000) then
+        geradorEspecial=0
+        bolas.tipo= tiposDeBolasEspeciais[love.math.random(1,#tiposDeBolasEspeciais)]
+        bolas.especial=true
+    else
     bolas.tipo = tiposDeBolas[love.math.random(1,#tiposDeBolas)]
-
+    end
     if( bolas.tipo=="grande") then 
         bolas.valor=50
         bolas.hpMax=5
@@ -23,6 +29,25 @@ function gerarBolas()
             bolas.raio = 60
             bolas.dano=2
         
+        elseif(bolas.tipo == "velocidade")then
+            bolas.valor=50
+            bolas.hpMax=1
+            bolas.hp=1
+            bolas.img = imgEspeciais[1]
+            bolas.width = bolas.img:getWidth()
+            bolas.heigth = bolas.img:getHeight()
+            bolas.raio = bolas.img:getWidth()/2
+            bolas.dano=3
+        elseif(bolas.tipo == "variosTiros")then
+            bolas.valor=50
+            bolas.hpMax=1
+            bolas.hp=1
+            bolas.img = imgEspeciais[2]
+            bolas.width = bolas.img:getWidth()
+            bolas.heigth = bolas.img:getHeight()
+            bolas.raio = bolas.img:getWidth()/2
+            bolas.dano=3
+
         else
             bolas.valor=10
             bolas.hpMax=1
@@ -62,7 +87,10 @@ function gerarBolas()
         bolas.incrementoX = love.math.random(incrementoMinimo,incrementoMaximo)
         bolas.incrementoY = -1 * love.math.random(incrementoMinimo,incrementoMaximo)
     end
-
+   -- if(bolas.especial)then
+       -- bolas.incrementoX = 1
+       -- bolas.incrementoY = 1
+   -- end
     table.insert(listaBolaspika,bolas)
     
 end
